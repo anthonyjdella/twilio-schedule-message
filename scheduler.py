@@ -17,12 +17,12 @@ auth_token = os.getenv('TWILIO_AUTH_TOKEN')
 client = Client(account_sid, auth_token)
 
 
-def schedule_message(minutes, body):
+def schedule_message(to_number, minutes, body):
     try:
         message = client.messages \
             .create(
                 messaging_service_sid = os.getenv('TWILIO_MSG_SRVC_SID'),
-                to = 'ENTER_THE_NUMBER_YOURE_TEXTING_TO',
+                to = to_number,
                 body = body,
                 schedule_type = 'fixed',
                 send_at = minutes_from_now(minutes)
@@ -39,4 +39,4 @@ def minutes_from_now(minutes):
         print('Message must be scheduled more than 15 minutes and fewer than 7 days in advance.')
 
 
-schedule_message(16, 'Ahoy, world! This is another scheduled message in Python.')
+schedule_message('+1XXXXXXXXXX', 16, 'Ahoy, world! This is another scheduled message in Python.')
