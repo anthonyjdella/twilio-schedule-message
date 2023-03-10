@@ -30,6 +30,7 @@ def schedule_message(to_number, minutes, body):
         print(message.sid)
     except TwilioRestException as e:
         print(e)
+        raise
 
 
 def minutes_from_now(minutes):
@@ -39,4 +40,4 @@ def minutes_from_now(minutes):
         print('Message must be scheduled more than 15 minutes and fewer than 7 days in advance.')
 
 
-schedule_message('+1XXXXXXXXXX', 16, 'Ahoy, world! This is another scheduled message in Python.')
+# schedule_message('+1XXXXXXXXXX', 16, 'Ahoy, world! This is another scheduled message in Python.')
