@@ -13,15 +13,9 @@ At the time of publishing this blog post, [Twilio Studio](https://www.twilio.com
 
 ![](https://lh3.googleusercontent.com/Eny41DRzcKhom_HhMvMb6_9_UslIkPpWRN2WiBgARntlPGmZ5wB_1ShMD3d1KuybOMo9neBCH2FgXPzimaq1YZptyKXuZIMNSbxekDijyQ6apUcMxOs1SuBeCEbLiLTSbB4YGnqVv6yzMkgTrsZqCzw)
 
-!!!info 
-
-Please note that code snippets will be shown in Python (in this [GitHub repo](https://github.com/anthonyjdella/twilio-schedule-message)), however the same principle applies to [scheduling a message in other languages](https://www.twilio.com/docs/sms/api/message-resource?code-sample=code-create-a-message&code-language=Node.js&code-sdk-version=4.x#schedule-a-message-resource).
-
-!!!
+> Please note that code snippets will be shown in Python (in this [GitHub repo](https://github.com/anthonyjdella/twilio-schedule-message)), however the same principle applies to [scheduling a message in other languages](https://www.twilio.com/docs/sms/api/message-resource?code-sample=code-create-a-message&code-language=Node.js&code-sdk-version=4.x#schedule-a-message-resource).
 
 This blog post will be structured as followed (feel free to jump ahead):
-
-!!!warning
 
 - **Prerequisites**: Things you need before continuing
 - **Step 1**: Create a free Twilio account
@@ -33,8 +27,6 @@ This blog post will be structured as followed (feel free to jump ahead):
 - **Step 7**: Create an endpoint to connect with Studio
 - **Step 8**: Use Twilio Studio to schedule a message
 - **Next Steps & Related Resources**  
-
-!!! 
 
 
 ## Prerequisites
@@ -48,11 +40,7 @@ This blog post will be structured as followed (feel free to jump ahead):
 
 If you want to give Twilio a spin, and haven’t yet, [sign up for a free Twilio account](https://www.twilio.com/try-twilio). Sign up is quick and no credit card is required!
 
-!!!info
-
-The signup process includes [verifying your personal phone number](https://www.twilio.com/docs/usage/tutorials/how-to-use-your-free-trial-account#verify-your-personal-phone-number), as a security measure.
-
-!!!
+> The signup process includes [verifying your personal phone number](https://www.twilio.com/docs/usage/tutorials/how-to-use-your-free-trial-account#verify-your-personal-phone-number), as a security measure.
 
 
 ## Step 2: Buy a Twilio phone number
@@ -63,13 +51,10 @@ After signing up for an account, log in to the [Twilio Console](https://www.twil
 
 ![Click Buy a Number to buy a number in Twilio Console](https://lh6.googleusercontent.com/FQ7HeAmw9pg0ZcgMJbWAQhzZ6OsRsDej6LOPcSXn94_Txh1l8hq0NnAVjktSrFqd6Os0XJAA2912TsSQD4sQpFFKyTzHcKEDggpXYBXgKkMOrqk9ApBZ8tngDGKzaiOLIYHK78CHq907s3mjg9HCstc "Buy a Number in Twilio Console")
 
-!!!info
+> When you [sign up for a free Twilio account](https://www.twilio.com/try-twilio), you’re given a [free trial balance](https://support.twilio.com/hc/en-us/articles/223136107-How-does-Twilio-s-Free-Trial-work-) ($15 in the United States) for you to experiment with.
 
-When you [sign up for a free Twilio account](https://www.twilio.com/try-twilio), you’re given a [free trial balance](https://support.twilio.com/hc/en-us/articles/223136107-How-does-Twilio-s-Free-Trial-work-) ($15 in the United States) for you to experiment with.
+> [Twilio pricing](https://www.twilio.com/en-us/pricing) uses a pay-as-you-go usage-based model for SMS so you aren’t locked into any contracts.
 
-[Twilio pricing](https://www.twilio.com/en-us/pricing) uses a pay-as-you-go usage-based model for SMS so you aren’t locked into any contracts.
-
-!!!
 
 
 ## Step 3: Create a Messaging Service
@@ -151,8 +136,7 @@ Continuing on this screen, enter the following details:
 
 If successful, you should receive an SMS at your test number and see a similar response to the following in the Console:
 
-\`\`\`curl hl_lines=”1”
-
+```
 201 - CREATED - The request was successful. We created a new resource and the response body contains the representation.
 
 {
@@ -202,16 +186,11 @@ If successful, you should receive an SMS at your test number and see a similar r
   }
 
 }
-
-\`\`\`
+```
 
 ![Check the message on your phone](https://lh5.googleusercontent.com/m-zAQQ0CWM_sg-fudO32GswVIyIkOGKIi0mSv2wLnDjF6_fMOHxwQeVZiPtdzBfAjdHGi0Po1WxiL5OyEUrn1ARv50o0MVD-kwtdXmEFGs6gwXtYd59kfsq218Y_HNWOV6r3G4z3H5sgseVfZ_-FC1E "Check the message on your phone")
 
-!!!info
-
-Once you have created a Messaging Service, you should note down your Messaging Service SID from the [list of Messaging Services](https://www.twilio.com/console/sms/services). It should look similar to this: \`MGXXXXXXXXXXX\`
-
-!!!
+> Once you have created a Messaging Service, you should note down your Messaging Service SID from the [list of Messaging Services](https://www.twilio.com/console/sms/services). It should look similar to this: \`MGXXXXXXXXXXX\`
 
 
 ## Step 4: Setup local environment
@@ -220,43 +199,33 @@ Having successfully created a Messaging Service, this step will set up a project
 
 Open a [Terminal window](https://www.youtube.com/watch?v=lZ7Kix9bjPI) and create an empty project directory called _twilio-schedule-message_:
 
-\`\`\`bash
-
+```bash
 mkdir twilio-schedule-message
-
-\`\`\`
+```
 
 Then change into that directory, as that’s where your code will be.
 
-\`\`\`bash
-
+```bash
 cd twilio-schedule-message
-
-\`\`\`
+```
 
 Since the code for this tutorial will be in Python, create a [virtual environment](https://www.twilio.com/docs/usage/tutorials/how-to-set-up-your-python-and-flask-development-environment#start-a-new-project-with-virtualenv):
 
-\`\`\`bash
-
+```bash
 python3 -m venv .venv
-
-\`\`\`
+```
 
 Activate your virtual environment:
 
-\`\`\`bash
-
+```bash
 source .venv/bin/activate
-
-\`\`\`
+```
 
 Then, using the _pip_ package manager, install the required dependencies in your virtual environment:
 
-\`\`\`bash
-
+```bash
 pip install python-dotenv twilio>=7.16.5 Flask
-
-\`\`\`
+```
 
 
 ## Step 5: Configure environment variables
@@ -267,53 +236,41 @@ Create a file called _.env_ in the project’s root directory (_twilio-schedule-
 
 Within the _.env_ file, create the following environment variables:
 
-\`\`\`textTWILIO_ACCOUNT_SID=PASTE_YOUR_ACCOUNT_SID_HERE
+```
+TWILIO_ACCOUNT_SID=PASTE_YOUR_ACCOUNT_SID_HERE
 
 TWILIO_AUTH_TOKEN=PASTE_YOUR_AUTH_TOKEN_HERE
 
 TWILIO_MSG_SRVC_SID=PASTE_YOUR_MESSAGE_SERVICE_SID_HERE
+```
 
-\`\`\`
+> Make sure to replace \`PASTE_YOUR_ACCOUNT_SID_HERE\` and \`PASTE_YOUR_AUTH_TOKEN_HERE\` with the Account SID and Auth Token associated with your Twilio Account. These can be found on the Homepage of your [Twilio Console](https://console.twilio.com/?_ga=2.137541174.767182747.1677535731-1111941364.1657213658) under **Account Info**.
 
-!!!info
+> Also, replace \`PASTE_YOUR_MESSAGE_SERVICE_SID_HERE\` with the Message Service SID from the Message Service you created earlier. This can be found from the [list of Messaging Services](https://www.twilio.com/console/sms/services).
 
-Make sure to replace \`PASTE_YOUR_ACCOUNT_SID_HERE\` and \`PASTE_YOUR_AUTH_TOKEN_HERE\` with the Account SID and Auth Token associated with your Twilio Account. These can be found on the Homepage of your [Twilio Console](https://console.twilio.com/?_ga=2.137541174.767182747.1677535731-1111941364.1657213658) under **Account Info**.
-
-Also, replace \`PASTE_YOUR_MESSAGE_SERVICE_SID_HERE\` with the Message Service SID from the Message Service you created earlier. This can be found from the [list of Messaging Services](https://www.twilio.com/console/sms/services).
-
-!!!
 
 Your _.env_ file should now look similar to this:
 
-\`\`\`textTWILIO_ACCOUNT_SID=ACXXXXXXXXXXX
+```
+TWILIO_ACCOUNT_SID=ACXXXXXXXXXXX
 
 TWILIO_AUTH_TOKEN=12345678901234567
 
 TWILIO_MSG_SRVC_SID=MGXXXXXXXXXXX
+```
 
-\`\`\`
-
-!!!info
-
-If you’re pushing this code to a Git repository, please make sure to add the _.env_ file to your _.gitignore_ so that these credentials are secured. i.e. \`echo ".env" >> .gitignore\`
-
-!!!
+> If you’re pushing this code to a Git repository, please make sure to add the _.env_ file to your _.gitignore_ so that these credentials are secured. i.e. \`echo ".env" >> .gitignore\`
 
 
 ## Step 6: Schedule a text message with Twilio
 
 In this next step, you will interact with the [Twilio SMS API](https://www.twilio.com/docs/sms/api) to create a scheduled message.
 
-!!!info
-
-If you’d like to see the code associated with this blog post, it’s available in this [GitHub repository](https://github.com/anthonyjdella/twilio-schedule-message).
-
-!!!
+> If you’d like to see the code associated with this blog post, it’s available in this [GitHub repository](https://github.com/anthonyjdella/twilio-schedule-message).
 
 Within your project directory, create a file called _scheduler.py_ and paste the following code into it:
 
-\`\`\`python
-
+```python
 import os
 
 from datetime import datetime
@@ -378,8 +335,7 @@ def schedule_message():
 
 
 schedule_message()
-
-\`\`\`
+```
 
 Here’s a breakdown of the code in _scheduler.py_:
 
@@ -407,21 +363,16 @@ Here’s a breakdown of the code in _scheduler.py_:
 
 To test out the message, run the _scheduler.py _file with this command in your terminal:
 
-\`\`\`bash
-
+```bash
 python3 scheduler.py
+```
 
-\`\`\`
+> Message Scheduling supports messages that need to be scheduled more than 15 minutes but fewer than 7 days in advance. Therefore, when modifying the value of the \`send_at\` parameter, make sure it falls within that range (>15 minutes and &lt;7 days).
 
-!!!info
-
-Message Scheduling supports messages that need to be scheduled more than 15 minutes but fewer than 7 days in advance. Therefore, when modifying the value of the \`send_at\` parameter, make sure it falls within that range (>15 minutes and &lt;7 days).
-
-!!!
 
 Your application is now capable of sending a scheduled message at a fixed time in the future. But by modifying the _scheduler.py _file, you can adjust the \`schedule_message()\` function to accept dynamic parameters. This way, instead of hardcoding values into the function, they can be provided at execution time for greater flexibility. Check out changes made to the _scheduler.py _file:
 
-\`\`\`python hl_lines=”3 20 26 28 36-40 43”
+```python
 
 import os
 
@@ -500,8 +451,7 @@ def minutes_from_now(minutes):
 
 
 schedule_message(16, 'Ahoy, world! This is another scheduled message in Python.')
-
-\`\`\`
+```
 
 Here’s a breakdown of the revisions made to _scheduler.py_:
 
@@ -521,15 +471,13 @@ Here’s a breakdown of the revisions made to _scheduler.py_:
 
 Test out the scheduler by re-running the _scheduler.py _file with this command in your terminal:
 
-\`\`\`bash
-
+```bash
 python3 scheduler.py
-
-\`\`\`
+```
 
 Before continuing to the next step, let’s make one more change to our function. Instead of hardcoding a “to” phone number, you can parameterize it. Make note of the following changes to \`schedule_message()\`:
 
-\`\`\`python hl_lines=”1 6”
+```python
 
 def schedule_message(to_number, minutes, body):
 
@@ -558,8 +506,7 @@ def schedule_message(to_number, minutes, body):
         print(e)
 
         raise
-
-\`\`\`
+```
 
 - Line 1, adds a new parameter, \`to_number\`, to the function.
 - Line 6, passes the value of \`to_number\` to the \`to\` parameter.
@@ -572,7 +519,7 @@ In the previous step, you created a function called \`schedule_message()\` that 
 
 Within your project directory, create a file called _app.py_ and paste the following code into it:
 
-\`\`\`python
+```python
 
 from flask import Flask
 
@@ -619,7 +566,7 @@ def send_scheduled_texts():
 
 app.run(host='localhost', port=3000)
 
-\`\`\`
+```
 
 Here’s a breakdown of the code in _app.py_:
 
@@ -639,27 +586,19 @@ Here’s a breakdown of the code in _app.py_:
 
 In a new terminal window, run _app.py_ with the following command:
 
-\`\`\`bash
-
+```bash
 python3 app.py
+```
 
-\`\`\`
-
-!!!warning
-
-If you receive an error message, you may need to comment out the \`schedule_message()\` invocation in _scheduler.py_ on line 43.
-
-!!!
+> If you receive an error message, you may need to comment out the \`schedule_message()\` invocation in _scheduler.py_ on line 43.
 
 At this point, your server should be running on <http://localhost:8080>. As of now, your application is only running on a server within your computer. But you need a public-facing URL (not <http://localhost>). You could deploy your application to a remote host, but a quick way to temporarily make your web application available on the Internet is by using a tool called [ngrok](https://ngrok.com/product).
 
 In another terminal window run the following command:
 
-\`\`\`bash
-
+```bash
 ngrok http 8080
-
-\`\`\`
+```
 
 This will create a “tunnel” from the public Internet to port 8080 on your local machine, where the Flask app is listening for requests. You should see output similar to this:
 
@@ -669,11 +608,7 @@ Take note of the line that says “Forwarding”. In the image above, it reads: 
 
 This means that your local application is accessible, publicly, on \`https&#x3A;//5bad813c2718.ngrok.io\` and your endpoint is accessible on \`https&#x3A;//5bad813c2718.ngrok.io/v1/message/schedule\`.
 
-!!!info
-
-Each time you run the command \`ngrok http 8080\`, a new Forwarding URL will be randomly generated. 
-
-!!!
+> Each time you run the command \`ngrok http 8080\`, a new Forwarding URL will be randomly generated. 
 
 
 ## Step 8: Use Twilio Studio to schedule a message
@@ -701,8 +636,7 @@ Select the **Make HTTP Request** widget to configure the following properties:
 - Change the **Content Type** to “Application/JSON” in the dropdown
 - Add the following to the **Request Body**:
 
-\`\`\`json
-
+```json
 {
 
     "number": "{{contact.channel.address}}",
@@ -712,16 +646,11 @@ Select the **Make HTTP Request** widget to configure the following properties:
     "message": "Ahoy, world!"
 
 }
+```
 
-\`\`\`
+> The **Request URL** should point to a [publicly available URL](https://www.twilio.com/docs/usage/webhooks/getting-started-twilio-webhooks#run-your-application-on-a-public-url). If you used ngrok, paste the Forwarding URL from the output of running \`ngrok http 8080\`.
 
-!!!info
-
-The **Request URL** should point to a [publicly available URL](https://www.twilio.com/docs/usage/webhooks/getting-started-twilio-webhooks#run-your-application-on-a-public-url). If you used ngrok, paste the Forwarding URL from the output of running \`ngrok http 8080\`.
-
-When modifying _minutes_, make sure it falls within the range (>15 and &lt;10080 minutes), since Message Scheduling supports messages that need to be scheduled more than 15 minutes and fewer than 7 days in advance.
-
-!!!
+> When modifying _minutes_, make sure it falls within the range (>15 and &lt;10080 minutes), since Message Scheduling supports messages that need to be scheduled more than 15 minutes and fewer than 7 days in advance.
 
 ![](https://lh4.googleusercontent.com/4zlUPBSQ4fFbOUldxmV2s9skZDkS53EXWI7SSX3psyYPJt8hDtK6Toq1lHIEsQASyQRVEB0FRtflb_49cuwu6WFepHWVnpQ9MCrQpLUlsonj-ygpZAJUD5R44fTwxUHQZ3IPvp4gUvscwffVcI7_EGE)
 
@@ -741,11 +670,7 @@ Select your Twilio phone number and scroll down to the **Messaging** section. Un
 
 With your Flow published, your web server and ngrok running, you can try it out.
 
-!!!info
-
-Make sure that your web server and ngrok are running before the message is meant to be scheduled (in this case, 16 minutes).
-
-!!! 
+> Make sure that your web server and ngrok are running before the message is meant to be scheduled (in this case, 16 minutes).
 
 Since the Flow is triggered by an Incoming Message, send a text message to your Twilio number to trigger the scheduled message.
 
@@ -764,10 +689,6 @@ Thanks so much for reading! If you found this tutorial helpful, have any questio
 
 ![](https://lh5.googleusercontent.com/QqqYPg-hhp8oQKv4XEWLDNhjs5DrmgJbm_qEWZWJLzudWG9T46R7OIGWhVDRHjosLv7aM-I3xXxzORP6VhiUjbJvZIjiO1RZx-aLdIJXwZUMXTgwR8b1FRzWKra4KTQP2gljGhKXRG1fp83uWqkYbEk)
 
-!!!info
+> _Anthony Dellavecchia is a Developer Evangelist at Twilio who writes code on stage in front of a crowd. He is an experienced software developer who teaches thousands of people how to change the world with code. His goal is to help you build deep experiences and connections with technology so that they stick with you forever._
 
-_Anthony Dellavecchia is a Developer Evangelist at Twilio who writes code on stage in front of a crowd. He is an experienced software developer who teaches thousands of people how to change the world with code. His goal is to help you build deep experiences and connections with technology so that they stick with you forever._
-
-_Check him out online @anthonyjdella -- _[_Twitter_](https://twitter.com/anthonyjdella)_ • _[_Linkedin_](https://www.linkedin.com/in/anthonydellavecchia/)_ • _[_GitHub_](https://github.com/anthonyjdella)_ • _[_TikTok_](https://tiktok.com/@anthonyjdella)_ • _[_Medium_](https://medium.com/@anthonyjdella)_ • _[_Dev.to_](https://dev.to/anthonyjdella)_ • Email • _[_anthonydellavecchia.com_](https://anthonydellavecchia.com/)_ 👈_
-
-!!!
+> _Check him out online @anthonyjdella -- _[_Twitter_](https://twitter.com/anthonyjdella)_ • _[_Linkedin_](https://www.linkedin.com/in/anthonydellavecchia/)_ • _[_GitHub_](https://github.com/anthonyjdella)_ • _[_TikTok_](https://tiktok.com/@anthonyjdella)_ • _[_Medium_](https://medium.com/@anthonyjdella)_ • _[_Dev.to_](https://dev.to/anthonyjdella)_ • Email • _[_anthonydellavecchia.com_](https://anthonydellavecchia.com/)_ 👈_
